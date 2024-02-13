@@ -1,14 +1,13 @@
 import React from 'react'
-import Search from './Search'
+// import Search from './Search'
 import About from './About'
 import Plan from './Plan'
 
-export default function Home () {
+export default function Home() {
 
   return (
     <div>
-     
-        <Search />
+      {/* <Search /> */}
       <About />
       <Plan />
     </div>

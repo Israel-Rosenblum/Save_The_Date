@@ -7,6 +7,7 @@ import MultiCalender from './MultiCalender'
 export default function NewHall() {
     const parsData = JSON.parse(sessionStorage.getItem('ownerDetails'))
     const nav = useNavigate()
+    // const [image, setImage] = useState([])
     const [newHall, setNewHall] = useState({
         userId: parsData._id,
         hallName: "",
@@ -17,7 +18,7 @@ export default function NewHall() {
         phone: "",
         city: "",
         address: "",
-        photos: "",
+        photos: [],
         hall: false,
         eventGarden: false,
         Mehadrin: false,
@@ -26,7 +27,8 @@ export default function NewHall() {
         accessibility: false,
         parking: false
     })
-    console.log(newHall.dates);
+    console.log(newHall.photos);
+    // console.log(image);
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -38,6 +40,21 @@ export default function NewHall() {
 
         }
     };
+    
+    // const handleFileChange = async (e) => {
+    //     const file = e.target.files[0]; // Get the first selected file
+      
+    //     if (!file) {
+    //       return; // Handle no file selected case
+    //     }
+      
+    //     const blob = file.slice(0, file.size);
+    //     const buffer = Buffer.from(blob);
+    //     const binaryData = buffer.toString('binary');
+      
+    //     console.log(binaryData);
+    //   };
+      
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
@@ -47,16 +64,23 @@ export default function NewHall() {
                         <TextField name="שם אולם" customKey="hallName" type="text" setField={setNewHall} field={newHall} />
                         <TextField name="מספר אורחים מקסימלי" customKey="amount" type="number" setField={setNewHall} field={newHall} />
                         <TextField name="תיאור" customKey="description" type="textarea" setField={setNewHall} field={newHall} />
-                        <span>בחר תאריכים פנויים</span>
-                        <MultiCalender setField={setNewHall} field={newHall} customKey="dates" />
+
+                        <div className='w-full  rounded-md font-medium  m-auto mt-9 py-3 text-black'>
+                            <span className='md:text-2xl text-xl font-bold   m-auto '>בחר תאריכים פנויים</span>
+                            <MultiCalender setField={setNewHall} field={newHall} customKey="dates" />
+                        </div>
+
                         <label id="about">אודות</label>
                         <textarea id="about" name="about" rows="5" cols="50"
                             onChange={(e) => setNewHall({ ...newHall, about: e.target.value })}>
                         </textarea>
+
                         <TextField name=" טלפון ליצירת קשר" customKey="phone" type="text" setField={setNewHall} field={newHall} />
                         <TextField name="עיר " customKey="city" type="text" setField={setNewHall} field={newHall} />
                         <TextField name="כתובת " customKey="address" type="text" setField={setNewHall} field={newHall} />
-                        {/* <TextField name="הכנס קישור לתמונה " customKey="photos" type="url" setField={setNewHall} field={newHall} /> */}
+                        <TextField name="הכנס קישור לתמונה " customKey="photos" type="file" setField={setNewHall} field={newHall} />
+
+                        {/* <input name="הכנס קישור לתמונה " customKey="photos" type="file" onChange={handleFileChange} /> */}
 
                         <h1 className='font-bold text-center'>סוג המתחם</h1>
                         <Checkbok name=" אולם אירועים" customKey="hall" type="checkbox" setField={setNewHall} field={newHall} />

@@ -10,7 +10,7 @@ export default function Plan() {
       </section>
 
       <section className="h-full">
-        <img className='rotate-180' src="../assets/xxx.jpg" alt="" />
+        {/* <img className='rotate-180' src="../assets/xxx.jpg" alt="" /> */}
 
       </section>
 

@@ -3,7 +3,7 @@ import React from 'react'
 export default function About() {
   return (
     <div className=' bg-white text-center mt-20   h-full  '>
-      <h1 className='md:text-3xl sm:text-2xl text-1xl font-bold pt-10'> למעלה מ 200,000 אירועים תוכננו עם<span className='md:text-5xl sm:text-4xl text-2xl font-bold '> SAVE THE DADE</span></h1>
+      <h1 className='md:text-3xl sm:text-2xl text-1xl font-bold pt-10'> למעלה מ 200,000 אירועים תוכננו עם<span className='md:text-5xl sm:text-4xl text-2xl font-bold '> SAVE THE DATE</span></h1>
 
       <div className='text-white max-w-[1240px] mx-auto grid md:grid-cols-3 gap-8' >
 

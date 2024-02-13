@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { data } from 'autoprefixer'
+
 
 
 export default function OwnerHall() {
@@ -29,13 +29,14 @@ export default function OwnerHall() {
   return (
     <div >
       {Array.isArray(ownerData) && ownerData.map((data, index) => (
-        <div >
+        <div key={index} >
+
           <div className='my-5 border rounded-2xl h-[500px] w-full bg-no-repeat bg-cover bg-bottom bg-test '></div>
           <div onClick={() => nav('/newHall')} className='float-left m-4 p-8 text-white font-bold hover:scale-110  border border-white'>
             <span className="material-symbols-outlined">add </span>
             <h1  >צור אולם</h1>
           </div>
-          <div className='text-white mt-20 max-w-[1240px]' key={index}>
+          <div className='text-white mt-20 max-w-[1240px]' >
             <h1 className='md:text-5xl sm:text-4xl text-3xl font-bold p-2 m-2'>
               {ownerData[index]?.hallName}
             </h1>
