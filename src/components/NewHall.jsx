@@ -7,28 +7,13 @@ import MultiCalender from './MultiCalender'
 export default function NewHall() {
     const parsData = JSON.parse(sessionStorage.getItem('ownerDetails'))
     const nav = useNavigate()
-    // const [image, setImage] = useState([])
     const [newHall, setNewHall] = useState({
-        userId: parsData._id,
-        hallName: "",
-        amount: "",
-        description: "",
-        dates: [],
-        about: "",
-        phone: "",
-        city: "",
-        address: "",
-        photos: [],
-        hall: false,
-        eventGarden: false,
-        Mehadrin: false,
-        kosher: false,
-        elevator: false,
-        accessibility: false,
-        parking: false
+        userId: parsData._id, hallName: "", amount: "", description: "", dates: [],
+        about: "", phone: "", city: "", address: "", // photos: [],
+        hall: false, eventGarden: false, Mehadrin: false, kosher: false,
+        elevator: false, accessibility: false, parking: false, fleshy: false, dairy: false,
     })
-    console.log(newHall.photos);
-    // console.log(image);
+    // console.log(newHall.photos);
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -40,22 +25,6 @@ export default function NewHall() {
 
         }
     };
-    
-    // const handleFileChange = async (e) => {
-    //     const file = e.target.files[0]; // Get the first selected file
-      
-    //     if (!file) {
-    //       return; // Handle no file selected case
-    //     }
-      
-    //     const blob = file.slice(0, file.size);
-    //     const buffer = Buffer.from(blob);
-    //     const binaryData = buffer.toString('binary');
-      
-    //     console.log(binaryData);
-    //   };
-      
-
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -80,7 +49,6 @@ export default function NewHall() {
                         <TextField name="כתובת " customKey="address" type="text" setField={setNewHall} field={newHall} />
                         <TextField name="הכנס קישור לתמונה " customKey="photos" type="file" setField={setNewHall} field={newHall} />
 
-                        {/* <input name="הכנס קישור לתמונה " customKey="photos" type="file" onChange={handleFileChange} /> */}
 
                         <h1 className='font-bold text-center'>סוג המתחם</h1>
                         <Checkbok name=" אולם אירועים" customKey="hall" type="checkbox" setField={setNewHall} field={newHall} />
@@ -89,6 +57,10 @@ export default function NewHall() {
                         <h1 className='font-bold text-center'>כשרות</h1>
                         <Checkbok name="כשר למהדרין" customKey="Mehadrin" type="checkbox" setField={setNewHall} field={newHall} />
                         <Checkbok name="כשר " customKey="kosher" type="checkbox" setField={setNewHall} field={newHall} />
+
+                        <h1 className='font-bold text-center'>תפריט</h1>
+                        <Checkbok name="בשרי " customKey="fleshy" type="checkbox" setField={setNewHall} field={newHall} />
+                        <Checkbok name="חלבי " customKey="dairy" type="checkbox" setField={setNewHall} field={newHall} />
 
                         <h1 className='font-bold text-center'>יש מעלית?</h1>
                         <Checkbok name="כן " customKey="elevator" type="checkbox" setField={setNewHall} field={newHall} />

@@ -1,24 +1,25 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import TextField from "./TextField";
 import axios from "axios";
 
 export default function Register({ setOwnerDetails }) {
-
-  const [newOwner,setNewOwner] =useState( {
-    firstName:"",
-    lastName:"",
-    phone:"",
-    password:"",
-    email:"",
+  const nav = useNavigate();
+  const [newOwner, setNewOwner] = useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    password: "",
+    email: "",
   });
 
   const createOwner = async (event) => {
     event.preventDefault();
-
     const { data } = await axios.post('http://localhost:4000/owner', { newOwner });
     console.log(data);
     if (data) {
       setOwnerDetails(data)
+    
     }
   };
   return (

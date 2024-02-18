@@ -5,7 +5,7 @@ export default function Checkbok(props) {
     return (
         <div className='flex items-center'>
             <input id={customKey} name={customKey} type={type} autoComplete={customKey}
-                className='mx-4'
+                className='m-4'
                 checked={field[customKey]}
                 onChange={() => setField({ ...field, [customKey]: !field[customKey] })}
             />

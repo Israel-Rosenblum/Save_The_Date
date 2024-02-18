@@ -2,10 +2,10 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <div className='h-80 b-0 text-white bg-[#1c1c1c]'>
+    <div className='h-full b-0 text-white bg-[#1c1c1c]'>
       <div className='max-w-[1240px] mx-auto'>
         <h1 className='text-center pt-8 font-bold text-3xl' >חיפושים נפוצים לאירוע</h1>
-        <div className='  my-14 flex justify-between '>
+        <div className='  mt-14 flex justify-between '>
           <div className='flex justify-center text-lg '>
             <ul >
               <li>אולמות אירועים באזור חיפה</li>

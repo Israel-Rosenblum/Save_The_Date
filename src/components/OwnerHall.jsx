@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-
-
 export default function OwnerHall() {
   const nav = useNavigate()
   const parsData = JSON.parse(sessionStorage.getItem('ownerDetails'))
@@ -28,9 +26,9 @@ export default function OwnerHall() {
 
   return (
     <div >
-      {Array.isArray(ownerData) && ownerData.map((data, index) => (
+      {/* אם קיים בעל אולם מוצג באולמות שבבעלותו */}
+      {ownerData && ownerData.length > 0 ? ownerData.map((data, index) => (
         <div key={index} >
-
           <div className='my-5 border rounded-2xl h-[500px] w-full bg-no-repeat bg-cover bg-bottom bg-test '></div>
           <div onClick={() => nav('/newHall')} className='float-left m-4 p-8 text-white font-bold hover:scale-110  border border-white'>
             <span className="material-symbols-outlined">add </span>
@@ -84,7 +82,11 @@ export default function OwnerHall() {
           </div>
 
         </div>
-      ))}
+      )) :  //אם נרשם בעל אולם חדש
+        <div onClick={() => nav('/newHall')} className=' w-40 h-40 m-4 p-8 text-white font-bold hover:scale-110  border border-white '>
+          <span className="material-symbols-outlined">add </span>
+          <h1  >צור אולם</h1>
+        </div>}
 
 
     </div>
