@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'
-import TextField from "./TextField";
+import TextField from "./compoInputs/TextField";
 import axios from "axios";
 
 export default function Register({ setOwnerDetails }) {
@@ -19,7 +19,7 @@ export default function Register({ setOwnerDetails }) {
     console.log(data);
     if (data) {
       setOwnerDetails(data)
-    
+
     }
   };
   return (

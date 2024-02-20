@@ -1,40 +1,41 @@
 import React, { useContext, useState } from 'react'
 import DataContext from './context/DataContext';
-import Checkbok from './Checkbok.buttom'
-
+import Checkbok from './compoInputs/Checkbok.buttom'
+import RadioFilter from './compoInputs/RadioFilter';
 
 export default function Filter() {
   const { searchResults, setFilterResults } = useContext(DataContext);
-  console.log("🚀 ~ Filter ~ searchResults", searchResults)
 
   const [filter, setFilter] = useState({
-    max200: false, max300: false, max400: false, max500: false, max600: false,
-    Mehadrin: false, kosher: false,
+    amount: 0, Mehadrin: false, kosher: false,
     fleshy: false, dairy: false, vegan: false,
     eventGarden: false, hall: false,
   })
 
   const heandleSubmit = async () => {
+    // מחזיר מערך רק של true
     const result = {};
     Object.keys(filter).forEach((key) => {
       if (filter[key]) {
         result[key] = filter[key];
       }
     });
-    // console.log("🚀 ~ heandleSubmit ~ result", result)
+    //בודק האם השדות תואמים לסינון שנבחר
+    const matchingFields = searchResults.filter((obj2Item) => {
+      return Object.keys(result).every((data1) => {
+        if (data1 === "amount") {
+          console.log(obj2Item[data1], result[data1]);
+          return obj2Item[data1] <= result[data1];
+        }
+        return data1 in obj2Item && obj2Item[data1] === result[data1];
+      });
+    });
 
-    const data = Object.values(searchResults).map((data, index) => {
-      console.log(searchResults[index][Object.keys(result)[index]] != true);
-      // console.log(Object.keys(result)[index]);
-
-
-    })
-   
-
-
+    //אם נבחרו סינונים יציג את הסינונים ואם לא נבחרו סינונים העדכן את המצב ההתחלתי
+    matchingFields.length != 0 ?
+      setFilterResults(matchingFields) :
+      setFilterResults(searchResults)
   }
-
-
 
   return (
     <div className="h-[600px] overflow-auto touch-auto p-2 ">
@@ -48,11 +49,11 @@ export default function Filter() {
 
       <details className='m-4 border-b  border-slate-950'>
         <summary className='my-4 font-bold '>צפי אורחים</summary>
-        <Checkbok name="עד 200 " customKey="max200" type="checkbox" setField={setFilter} field={filter} />
-        <Checkbok name="עד 300" customKey="max300" type="checkbox" setField={setFilter} field={filter} />
-        <Checkbok name="עד 400 " customKey="max400" type="checkbox" setField={setFilter} field={filter} />
-        <Checkbok name="עד 500 " customKey="max500" type="checkbox" setField={setFilter} field={filter} />
-        <Checkbok name="מעל 600 " customKey="max600" type="checkbox" setField={setFilter} field={filter} />
+        <RadioFilter name="עד 200" setField={setFilter} field={filter} customKey="amount" amount="200" />
+        <RadioFilter name="עד 300" setField={setFilter} field={filter} customKey="amount" amount="300" />
+        <RadioFilter name="עד 400" setField={setFilter} field={filter} customKey="amount" amount="400" />
+        <RadioFilter name="עד 500" setField={setFilter} field={filter} customKey="amount" amount="500" />
+        <RadioFilter name="מעל 600 " setField={setFilter} field={filter} customKey="amount" amount="10000" />
       </details>
 
       <details className='m-4 border-b  border-slate-950'>

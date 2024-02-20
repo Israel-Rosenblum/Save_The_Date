@@ -6,7 +6,7 @@ import Map from './Map'
 import DataContext from './context/DataContext'
 
 export default function Display() {
-  const { selectedDates, searchResults, setSearchResults } = useContext(DataContext)
+  const { selectedDates, searchResults, setSearchResults,filterResults } = useContext(DataContext)
   //מציג את כל האולמות שנבחרו לפי התאריך
   useEffect(() => {
     async function getDates() {
@@ -18,7 +18,7 @@ export default function Display() {
 
   return (
     <div className='mt-20  bg-white '>
-      <h1 className='text-3xl tracking-wide text-center  bg-white'>נמצאו&nbsp;{searchResults.length}&nbsp;תוצאות</h1>
+      <h1 className='text-3xl tracking-wide text-center  bg-white'>נמצאו&nbsp;{filterResults.length}&nbsp;תוצאות</h1>
       <div className="flex  justify-around gap-4 p-2">
         <div className="h-full  w-full max-w-60 hidden lg:block">
           <Filter />

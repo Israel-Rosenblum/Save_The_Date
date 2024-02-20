@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import TextField from './TextField'
-import Checkbok from './Checkbok.buttom'
+import TextField from './compoInputs/TextField'
+import Checkbok from './compoInputs/Checkbok.buttom'
 import MultiCalender from './MultiCalender'
 export default function NewHall() {
     const parsData = JSON.parse(sessionStorage.getItem('ownerDetails'))
@@ -11,7 +11,7 @@ export default function NewHall() {
         userId: parsData._id, hallName: "", amount: "", description: "", dates: [],
         about: "", phone: "", city: "", address: "", // photos: [],
         hall: false, eventGarden: false, Mehadrin: false, kosher: false,
-        elevator: false, accessibility: false, parking: false, fleshy: false, dairy: false,
+        elevator: false, accessibility: false, parking: false, fleshy: false, dairy: false, vegan: false,
     })
     // console.log(newHall.photos);
     const handleSubmit = async (event) => {
@@ -61,6 +61,7 @@ export default function NewHall() {
                         <h1 className='font-bold text-center'>תפריט</h1>
                         <Checkbok name="בשרי " customKey="fleshy" type="checkbox" setField={setNewHall} field={newHall} />
                         <Checkbok name="חלבי " customKey="dairy" type="checkbox" setField={setNewHall} field={newHall} />
+                        <Checkbok name="טבעוני " customKey="vegan" type="checkbox" setField={setNewHall} field={newHall} />
 
                         <h1 className='font-bold text-center'>יש מעלית?</h1>
                         <Checkbok name="כן " customKey="elevator" type="checkbox" setField={setNewHall} field={newHall} />

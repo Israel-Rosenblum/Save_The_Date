@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
-import TextField from './TextField';
+import TextField from './compoInputs/TextField';
 
 export default function Login({ setOwnerDetails }) {
 
