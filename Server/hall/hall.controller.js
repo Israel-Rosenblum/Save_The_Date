@@ -9,8 +9,6 @@ async function create(data) {
 
 async function read(filter = {}) {
    const test= await hallModel.find(filter)
-//    console.log("🚀 ~ read ~ test", test)
-  
     return test
 }
 

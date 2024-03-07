@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import TextField from "./compoInputs/TextField";
 import axios from "axios";
 
-export default function Register({ setOwnerDetails }) {
+export default function Register({ setUserDetails }) {
   const nav = useNavigate();
-  const [newOwner, setNewOwner] = useState({
+  const [newUser, setNewUser] = useState({
     firstName: "",
     lastName: "",
     phone: "",
@@ -15,10 +15,10 @@ export default function Register({ setOwnerDetails }) {
 
   const createOwner = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post('http://localhost:4000/owner', { newOwner });
+    const { data } = await axios.post('http://localhost:4000/user', { newUser });
     console.log(data);
     if (data) {
-      setOwnerDetails(data)
+      setUserDetails(data)
 
     }
   };
@@ -32,11 +32,11 @@ export default function Register({ setOwnerDetails }) {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={createOwner}>
-          <TextField setField={setNewOwner} field={newOwner} name="שם פרטי" customKey="firstName" type="text" />
-          <TextField setField={setNewOwner} field={newOwner} name="שם משפחה" customKey="lastName" type="text" />
-          <TextField setField={setNewOwner} field={newOwner} name="אימיל" customKey="email" type="email" />
-          <TextField setField={setNewOwner} field={newOwner} name="טלפון" customKey="phone" type="tel" />
-          <TextField setField={setNewOwner} field={newOwner} name="סיסמא" customKey="password" type="password" />
+          <TextField setField={setNewUser} field={newUser} name="שם פרטי" customKey="firstName" type="text" />
+          <TextField setField={setNewUser} field={newUser} name="שם משפחה" customKey="lastName" type="text" />
+          <TextField setField={setNewUser} field={newUser} name="אימיל" customKey="email" type="email" />
+          <TextField setField={setNewUser} field={newUser} name="טלפון" customKey="phone" type="tel" />
+          <TextField setField={setNewUser} field={newUser} name="סיסמא" customKey="password" type="password" />
 
           <button
             className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 "
@@ -49,10 +49,4 @@ export default function Register({ setOwnerDetails }) {
   );
 }
 
-//   <div class="text-grey-dark mt-6">
-//          יש לך כבר משתמש?
-//           <a class="no-underline border-b border-blue text-blue" href="../login/">
-//               התחברות
-//           </a>.
-//       </div>
-// </div> */}
+

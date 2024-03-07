@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import Home from './Home'
 import Login from './Login'
 import Register from './Register'
-import OwnerHall from './OwnerHall'
+import UserHall from './userHall'
 import Display from './Display'
 import Hall from './Hall'
 import NewHall from './NewHall'
@@ -17,17 +17,18 @@ export default function Content() {
 
   const { selectedDates, setSelectedDates } = useContext(DataContext)
   //פרטי בעל האולם
-  const [ownerDetails, setOwnerDetails] = useState(parsedOwnerData || {})
+  const [userDetails, setUserDetails] = useState(parsedOwnerData || {})
 
   //מעדכן את בעל האולם ב sessionStorage
   useEffect(() => {
-    const ownerDetailsJSON = JSON.stringify(ownerDetails);
-    const ownerDetailsKey = 'ownerDetails';
-    sessionStorage.setItem(ownerDetailsKey, ownerDetailsJSON);
-    if (Object.keys(ownerDetails).length !== 0) {
-      nav('/ownerHall');
-    }
-  }, [ownerDetails])
+    const userDetailsJSON = JSON.stringify(userDetails);
+    const userDetailsKey = 'userDetails';
+    sessionStorage.setItem(userDetailsKey, userDetailsJSON);
+
+    // אם המשתמש הוא מנהל נעבור להרשמה ואם לא נעבור לאולם עצמו
+    userDetails.permission === "admin" ? nav('register') : nav('/userHall');
+  
+  }, [userDetails])
 
   //מציג את תוצאות האולמות שנבחרו
   useEffect(() => {
@@ -40,9 +41,9 @@ export default function Content() {
     <div>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login setOwnerDetails={setOwnerDetails} />} />
-        <Route path='/register' element={<Register setOwnerDetails={setOwnerDetails} />} />
-        <Route path='/ownerHall' element={<OwnerHall />} />
+        <Route path='/login' element={<Login setUserDetails={setUserDetails} />} />
+        <Route path='/register' element={<Register setUserDetails={setUserDetails} />} />
+        <Route path='/userHall' element={<UserHall />} />
         <Route path='/display' element={<Display />} />
         <Route path='/hall' element={<Hall />} />
         <Route path='/newHall' element={<NewHall />} />

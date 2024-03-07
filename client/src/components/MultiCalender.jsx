@@ -23,7 +23,7 @@ export default function MultiCalender(props) {
                 plugins={[<DatePanel />]}
                 value={selectedDates}
                 onChange={handleDateChange}
-
+               
                 style={{
                     width: "100%",
                     boxSizing: "border-box",

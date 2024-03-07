@@ -2,17 +2,19 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-
+require('dotenv').config()
+const jwt = require('jsonwebtoken')
+//connecting the Mongo
 require('./DL/db').connect();
 
 app.use(express.json({ limit: "250mb" }));
-
 app.use(cors());
 
-const ownerRouter = require('./owner/owner.router');
+const userRouter = require('./user/user.router');
 const hallRouter = require('./hall/hall.router');
+const uploadImage = require('./upload/upload.router')
 
-app.use('/owner', ownerRouter);
+app.use('/user', userRouter);
 app.use('/hall', hallRouter);
 
 app.use((req, res, next) => {
@@ -20,17 +22,7 @@ app.use((req, res, next) => {
     next();
 });
 
-const uploadImage = require('./upload/upload.router')
 app.use('/uploadImage', uploadImage);
-//   app.post("/uploadImage", async (req, res) => {
-//     try {
-//       const url = await uploadImage.uploadImage(req.body.image);
-//       res.send(url);
-//     } catch (error) {
-//       console.log(error.message + "/n" + error);
-//       res.status(500).send({ error: error.message });
-//     }
-//   });
 
 const port = process.env.PORT || 4000;
 
