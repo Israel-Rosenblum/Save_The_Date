@@ -3,7 +3,7 @@ const router = express.Router();
 const userService = require('./user.services')
 const jwt = require('../jwt')
 
-router.post('/', jwt.authenticateToken, async (req, res) => {
+router.post('/create', jwt.authenticateToken, async (req, res) => {
     try {
         let results = await userService.createUser(req.body.newUser)
         res.send(results)

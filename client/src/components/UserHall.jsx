@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import MultiCalender from './MultiCalender'
 import axios from 'axios'
+import UserCalender from './userCalender'
+import Cookies from 'js-cookie';
 
 export default function UserHall() {
   const nav = useNavigate()
   const parsData = JSON.parse(sessionStorage.getItem('userDetails'))
+
+  //מציג את כל האולמות שבבעלותו
   const [userHallData, setUserHallData] = useState({})
-  console.log("🚀 ~ UserHall ~ userHallData", userHallData)
+
+  //מעדכן את השינויים של התאריכים
+  const [editDates, setEditDates] = useState([])
+
+
   const id = parsData._id
   //מציג את האולמות שבבעלותו בעזרת הid
   useEffect(() => {
@@ -25,6 +32,25 @@ export default function UserHall() {
     }
     getOwnerHall();
   }, [])
+  //מעדכן את התאריכים בדאטה
+  useEffect(() => {
+    console.log(editDates);
+    try {
+      const token = Cookies.get("token")
+      const { data } =  axios.post('http://localhost:4000/user/id', editDates,
+      {headers:{}});
+      if (data) {
+        setUserHallData(data)
+        console.log(data);
+      }
+    }
+    catch (err) {
+
+    }
+
+
+
+  }, [editDates])
 
 
   return (
@@ -32,9 +58,7 @@ export default function UserHall() {
       {/* אם קיים בעל אולם מוצג באולמות שבבעלותו */}
       {userHallData && userHallData.length > 0 ? userHallData.map((data, index) => (
         <div key={index} >
-          <div>
-            {/* <MultiCalender changeDate={userHallData.dates} /> */}
-          </div>
+
           <div >
             <img className='my-5 border rounded-2xl h-[750px] w-full bg-no-repeat bg-cover bg-bottom  '
               src={userHallData[index]?.image} alt="" />
@@ -75,6 +99,10 @@ export default function UserHall() {
             <h1 className=' mx-auto text-2xl px-10 pt-3  '>אודות</h1>
             <div className='p-10 flex flex-row items-center md:w-[800px]  mx-auto leading-loose '>
               {userHallData[index]?.about}</div>
+          </div>
+          <div>
+            <h1 className='md:text-3xl sm:text-2xl text-1xl font-bold pt-10 text-center my-3'>עדכן את הלוח שנה שלך</h1>
+            <UserCalender emptiDate={userHallData[index]?.dates} setEditDates={setEditDates} />
           </div>
           <div className='bg-white grid md:grid-cols-2 gap-8  '>
             <div className='my-10  ' >

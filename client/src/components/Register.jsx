@@ -13,9 +13,9 @@ export default function Register({ setUserDetails }) {
     email: "",
   });
 
-  const createOwner = async (event) => {
+  const createUser = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post('http://localhost:4000/user', { newUser });
+    const { data } = await axios.post('http://localhost:4000/user/create', { newUser });
     console.log(data);
     if (data) {
       setUserDetails(data)
@@ -31,7 +31,7 @@ export default function Register({ setUserDetails }) {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={createOwner}>
+        <form className="space-y-6" onSubmit={createUser}>
           <TextField setField={setNewUser} field={newUser} name="שם פרטי" customKey="firstName" type="text" />
           <TextField setField={setNewUser} field={newUser} name="שם משפחה" customKey="lastName" type="text" />
           <TextField setField={setNewUser} field={newUser} name="אימיל" customKey="email" type="email" />
