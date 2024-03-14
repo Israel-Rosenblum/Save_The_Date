@@ -12,7 +12,7 @@ function createToken(email) {
 
 function generateAccessToken(user) {
   try {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '150s' })
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '150m' })
   } catch (error) {
     console.error('Error generating access token:', error)
   }
@@ -24,12 +24,15 @@ function authenticateToken(req, res, next) {
   if (token == null) return res.sendStatus(401)
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    console.log(err)
-    if (err) return res.sendStatus(403)
-    req.user = user
+    if (err) {
+      return res.sendStatus(403)
+    }
+
+    req.token = user
+
     next()
   })
 }
 
 
-module.exports = { createToken,authenticateToken }
+module.exports = { createToken, authenticateToken }

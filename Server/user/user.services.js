@@ -21,8 +21,19 @@ async function readUser(data) {
 async function readById(data) {
     const filter = { userId: data.id }
     let result = await hallContoller.read(filter)
-    console.log(result);
+    // console.log(result);
     return result;
 }
 
-module.exports = {  createUser,  readUser, readById }
+async function updateByEmail(data, updated) {
+    const filter = { email: data }
+    let getUser = await userContoller.read(filter)
+
+    const update = { $set: { "dates": updated } }
+    let result = await hallContoller.update({ userId: getUser[0]._id }, update)
+    // console.log(result);
+    return result;
+}
+
+
+module.exports = { createUser, readUser, readById, updateByEmail }

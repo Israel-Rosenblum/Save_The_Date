@@ -7,15 +7,16 @@ import Cookies from 'js-cookie';
 export default function UserHall() {
   const nav = useNavigate()
   const parsData = JSON.parse(sessionStorage.getItem('userDetails'))
+  const id = parsData._id
+
 
   //מציג את כל האולמות שבבעלותו
   const [userHallData, setUserHallData] = useState({})
+  console.log("🚀 ~ UserHall ~ userHallData", userHallData.dates)
 
   //מעדכן את השינויים של התאריכים
   const [editDates, setEditDates] = useState([])
 
-
-  const id = parsData._id
   //מציג את האולמות שבבעלותו בעזרת הid
   useEffect(() => {
     const getOwnerHall = async () => {
@@ -23,7 +24,6 @@ export default function UserHall() {
         const { data } = await axios.post('http://localhost:4000/user/id', { id });
         if (data) {
           setUserHallData(data)
-          console.log(data);
         }
       }
       catch (err) {
@@ -34,22 +34,15 @@ export default function UserHall() {
   }, [])
   //מעדכן את התאריכים בדאטה
   useEffect(() => {
-    console.log(editDates);
-    try {
-      const token = Cookies.get("token")
-      const { data } =  axios.post('http://localhost:4000/user/id', editDates,
-      {headers:{}});
-      if (data) {
-        setUserHallData(data)
-        console.log(data);
-      }
-    }
-    catch (err) {
+    axios.post('http://localhost:4000/user/update', editDates,
+      { headers: { authorization: Cookies.get("token") } })
+      .then(response => {
+        response && setUserHallData(...userHallData, { dates: response.config.data })
 
-    }
-
-
-
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }, [editDates])
 
 
@@ -58,7 +51,6 @@ export default function UserHall() {
       {/* אם קיים בעל אולם מוצג באולמות שבבעלותו */}
       {userHallData && userHallData.length > 0 ? userHallData.map((data, index) => (
         <div key={index} >
-
           <div >
             <img className='my-5 border rounded-2xl h-[750px] w-full bg-no-repeat bg-cover bg-bottom  '
               src={userHallData[index]?.image} alt="" />

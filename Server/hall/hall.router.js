@@ -8,7 +8,7 @@ const hallService = require('./hall.services');
 router.post('/', async (req, res) => {
     try {
         let results = await hallService.createHall(req.body.newHall)
-        console.log(results, "router");
+        // console.log(results, "router");
         res.send(results)
     }
     catch (err) {
