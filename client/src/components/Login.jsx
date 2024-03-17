@@ -6,8 +6,8 @@ import TextField from './compoInputs/TextField';
 export default function Login({ setUserDetails }) {
 
   const [UserLogin, setUserLogin] = useState({
+    email: "",
     password: "",
-    email: ""
   });
 
   const heandleUser = async (event) => {

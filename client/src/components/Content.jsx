@@ -13,21 +13,27 @@ import DataContext from './context/DataContext'
 
 export default function Content() {
   const nav = useNavigate();
-  const parsedOwnerData = JSON.parse(sessionStorage.getItem('ownerDetails'))
+  const parsedOwnerData = JSON.parse(localStorage.getItem('userDetails'))
 
   const { selectedDates, setSelectedDates } = useContext(DataContext)
   //פרטי בעל האולם
   const [userDetails, setUserDetails] = useState(parsedOwnerData || {})
+  console.log("🚀 ~ Content ~ userDetails", userDetails)
 
-  //מעדכן את בעל האולם ב sessionStorage
+  //מעדכן את בעל האולם ב localStorage
   useEffect(() => {
-    const userDetailsJSON = JSON.stringify(userDetails);
-    const userDetailsKey = 'userDetails';
-    sessionStorage.setItem(userDetailsKey, userDetailsJSON);
+    if (userDetails) {
+      const userDetailsJSON = JSON.stringify(userDetails);
+      const userDetailsKey = 'userDetails';
+      localStorage.setItem(userDetailsKey, userDetailsJSON);
+    }
+    //אם הוכנס שם משתמש 
+    if (Object.keys(userDetails).length > 0) {
+      // אם המשתמש הוא מנהל נעבור להרשמה ואם לא נעבור לאולם עצמו
+      userDetails.permission === "admin" ? nav('register') : nav('/userHall');
+    }
 
-    // אם המשתמש הוא מנהל נעבור להרשמה ואם לא נעבור לאולם עצמו
-    userDetails.permission === "admin" ? nav('register') : nav('/userHall');
-  
+
   }, [userDetails])
 
   //מציג את תוצאות האולמות שנבחרו

@@ -9,7 +9,7 @@ export default function Header() {
         setNav(!nav);
     }
     const clearStorage = () => {
-        sessionStorage.clear();
+        localStorage.clear();
     }
     return (
         <div className='text-white flex justify-between items-center  h-24 max-w-[1240px] mx-auto px-4  border-b '>

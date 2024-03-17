@@ -2,20 +2,17 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import UserCalender from './userCalender'
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 export default function UserHall() {
   const nav = useNavigate()
-  const parsData = JSON.parse(sessionStorage.getItem('userDetails'))
+  const parsData = JSON.parse(localStorage.getItem('userDetails'))
+  console.log("🚀 ~ parsData", parsData)
   const id = parsData._id
-
+  console.log("🚀 ~ id", id)
 
   //מציג את כל האולמות שבבעלותו
-  const [userHallData, setUserHallData] = useState({})
-  console.log("🚀 ~ UserHall ~ userHallData", userHallData.dates)
-
-  //מעדכן את השינויים של התאריכים
-  const [editDates, setEditDates] = useState([])
+  const [userHallData, setUserHallData] = useState([])
 
   //מציג את האולמות שבבעלותו בעזרת הid
   useEffect(() => {
@@ -31,34 +28,22 @@ export default function UserHall() {
       }
     }
     getOwnerHall();
-  }, [])
-  //מעדכן את התאריכים בדאטה
-  useEffect(() => {
-    axios.post('http://localhost:4000/user/update', editDates,
-      { headers: { authorization: Cookies.get("token") } })
-      .then(response => {
-        response && setUserHallData(...userHallData, { dates: response.config.data })
-
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, [editDates])
-
+  }, []);
 
   return (
     <div >
       {/* אם קיים בעל אולם מוצג באולמות שבבעלותו */}
+      {/* {userHallData && userHallData.map((data, index) => ( */}
       {userHallData && userHallData.length > 0 ? userHallData.map((data, index) => (
         <div key={index} >
           <div >
             <img className='my-5 border rounded-2xl h-[750px] w-full bg-no-repeat bg-cover bg-bottom  '
               src={userHallData[index]?.image} alt="" />
           </div>
-          <div onClick={() => nav('/newHall')} className='float-left m-4 p-8 text-white font-bold hover:scale-110  border border-white'>
+          {/* <div onClick={() => nav('/newHall')} className='float-left m-4 p-8 text-white font-bold hover:scale-110  border border-white'>
             <span className="material-symbols-outlined">add </span>
             <h1  >צור אולם</h1>
-          </div>
+          </div> */}
           <div className='text-white mt-20 max-w-[1240px]' >
             <h1 className='md:text-5xl sm:text-4xl text-3xl font-bold p-2 m-2'>
               {userHallData[index]?.hallName}
@@ -94,7 +79,7 @@ export default function UserHall() {
           </div>
           <div>
             <h1 className='md:text-3xl sm:text-2xl text-1xl font-bold pt-10 text-center my-3'>עדכן את הלוח שנה שלך</h1>
-            <UserCalender emptiDate={userHallData[index]?.dates} setEditDates={setEditDates} />
+            <UserCalender emptiDate={userHallData[index]?.dates} />
           </div>
           <div className='bg-white grid md:grid-cols-2 gap-8  '>
             <div className='my-10  ' >
@@ -111,11 +96,13 @@ export default function UserHall() {
           </div>
 
         </div>
-      )) :  //אם נרשם בעל אולם חדש
+      ))
+        :  //אם נרשם בעל אולם חדש
         <div onClick={() => nav('/newHall')} className=' w-40 h-40 m-4 p-8 text-white font-bold hover:scale-110  border border-white '>
           <span className="material-symbols-outlined">add </span>
           <h1  >צור אולם</h1>
-        </div>}
+        </div>
+      }
 
 
     </div>

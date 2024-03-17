@@ -6,12 +6,12 @@ import Checkbok from './compoInputs/Checkbok.buttom'
 import MultiCalender from './MultiCalender'
 import UploadImage from './upload/UploadImage'
 export default function NewHall() {
-    const parsData = JSON.parse(sessionStorage.getItem('ownerDetails'))
+    const parsData = JSON.parse(localStorage.getItem('ownerDetails'))
     const nav = useNavigate()
     const [newHall, setNewHall] = useState({
         userId: parsData._id,
         hallName: "", amount: "", description: "", dates: [],
-        about: "", phone: "", city: "", address: "",  image: "",
+        about: "", phone: "", city: "", address: "", image: "",
         hall: false, eventGarden: false, Mehadrin: false, kosher: false,
         elevator: false, accessibility: false, parking: false, fleshy: false, dairy: false, vegan: false,
     })
