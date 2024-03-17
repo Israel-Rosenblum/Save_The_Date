@@ -49,10 +49,10 @@ export default function Content() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login setUserDetails={setUserDetails} />} />
         <Route path='/register' element={<Register setUserDetails={setUserDetails} />} />
-        <Route path='/userHall' element={<UserHall />} />
+        <Route path='/userHall' element={<UserHall userDetails={userDetails} />} />
         <Route path='/display' element={<Display />} />
         <Route path='/hall' element={<Hall />} />
-        <Route path='/newHall' element={<NewHall />} />
+        <Route path='/newHall' element={<NewHall  />} />
         <Route path='*' element={<h1>not found</h1>} />
       </Routes>
     </div>

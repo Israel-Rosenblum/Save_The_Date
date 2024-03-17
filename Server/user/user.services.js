@@ -1,13 +1,13 @@
 const userContoller = require('./user.controller')
 const hallContoller = require('../hall/hall.controller')
-
+// require('dotenv').config()
 
 //validation
 async function createUser(data) {
+
     let result = await userContoller.create(data)
     return result
 }
-
 
 async function readUser(data) {
     const filter = {
@@ -34,6 +34,8 @@ async function updateByEmail(data, updated) {
     // console.log(result);
     return result;
 }
+
+
 
 
 module.exports = { createUser, readUser, readById, updateByEmail }

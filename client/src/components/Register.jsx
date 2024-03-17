@@ -38,7 +38,7 @@ export default function Register({ setUserDetails }) {
           <TextField setField={setNewUser} field={newUser} name="טלפון" customKey="phone" type="tel" />
           <TextField setField={setNewUser} field={newUser} name="סיסמא" customKey="password" type="password" />
 
-          <button
+          <button  onClick={() => nav('/newHall')} 
             className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 "
           >
             הרשמה

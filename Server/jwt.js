@@ -27,12 +27,17 @@ function authenticateToken(req, res, next) {
     if (err) {
       return res.sendStatus(403)
     }
-
     req.token = user
+    console.log("🚀 ~ jwt.verify ~ req.token", req.token)
 
     next()
   })
 }
+
+// function authenticateToken(req, res, next) {
+//   console.log(req);
+//   next()
+// }
 
 
 module.exports = { createToken, authenticateToken }

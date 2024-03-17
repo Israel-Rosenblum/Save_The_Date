@@ -5,24 +5,27 @@ import TextField from './compoInputs/TextField'
 import Checkbok from './compoInputs/Checkbok.buttom'
 import MultiCalender from './MultiCalender'
 import UploadImage from './upload/UploadImage'
+import Cookies from 'js-cookie';
+
 export default function NewHall() {
-    const parsData = JSON.parse(localStorage.getItem('ownerDetails'))
+    const parsData = JSON.parse(localStorage.getItem('userDetails'))
     const nav = useNavigate()
     const [newHall, setNewHall] = useState({
-        userId: parsData._id,
+        userId:  parsData._id,
         hallName: "", amount: "", description: "", dates: [],
         about: "", phone: "", city: "", address: "", image: "",
         hall: false, eventGarden: false, Mehadrin: false, kosher: false,
         elevator: false, accessibility: false, parking: false, fleshy: false, dairy: false, vegan: false,
     })
 
-    console.log(newHall.image);
+    // console.log(newHall.image);
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const { data } = await axios.post('http://localhost:4000/hall', { newHall });
+            const { data } = await axios.post('http://localhost:4000/hall/createHall', { newHall },
+            { headers: { authorization: Cookies.get("token") } })
             console.log("🚀 ~ handleSubmit ~ data", data.dates)
-            nav('/ownerHall')
+            nav('/login')
         }
         catch (err) {
 

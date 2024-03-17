@@ -19,6 +19,7 @@ export default function Login({ setUserDetails }) {
       const { accessToken } = data.token
       console.log("🚀 ~ heandleUser ~ accessToken", accessToken)
       Cookies.set("token", `Bearer ${accessToken} `, { expires: 1 });
+      
     }
   }
 
