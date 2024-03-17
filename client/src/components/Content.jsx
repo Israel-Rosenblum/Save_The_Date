@@ -27,12 +27,12 @@ export default function Content() {
       const userDetailsKey = 'userDetails';
       localStorage.setItem(userDetailsKey, userDetailsJSON);
     }
-    //אם הוכנס שם משתמש 
-    if (Object.keys(userDetails).length > 0) {
+//אם הוכנס שם משתמש 
+    if(Object.keys(userDetails).length >0) {
       // אם המשתמש הוא מנהל נעבור להרשמה ואם לא נעבור לאולם עצמו
       userDetails.permission === "admin" ? nav('register') : nav('/userHall');
     }
-
+   
 
   }, [userDetails])
 
