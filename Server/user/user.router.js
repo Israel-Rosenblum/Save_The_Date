@@ -7,7 +7,7 @@ router.post('/create', async (req, res) => {
     try {
         // if (req.user === PERMISSION_PASSWORD) {
         // }
-       
+
         let results = await userService.createUser(req.body.newUser)
         res.send(results)
     }

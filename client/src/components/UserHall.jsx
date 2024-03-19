@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import UserCalender from './userCalender'
 
-export default function UserHall({userDetails}) {
-  const nav = useNavigate()
+export default function UserHall() {
+  // const nav = useNavigate()
   const parsData = JSON.parse(localStorage.getItem('userDetails'))
   const id = parsData._id
+  // console.log("🚀 ~ UserHall ~ id", id)
 
   //מציג את כל האולמות שבבעלותו
   const [userHallData, setUserHallData] = useState([])
@@ -17,6 +18,7 @@ export default function UserHall({userDetails}) {
       try {
         const { data } = await axios.post('http://localhost:4000/user/id', { id });
         if (data) {
+          // console.log("🚀 ~ getOwnerHall ~ data", data)
           setUserHallData(data)
         }
       }
@@ -86,21 +88,8 @@ export default function UserHall({userDetails}) {
               </div>
             </div>
           </div>
-
         </div>
-      ))
-      //אם נרשם בעל אולם חדש
-       
-      // : 
-      //   <div 
-      //    onClick={() => nav('/newHall')} 
-      //    className=' w-40 h-40 m-4 p-8 text-white font-bold hover:scale-110  border border-white '>
-      //     <span className="material-symbols-outlined">add </span>
-      //     <h1  >צור אולם</h1>
-      //   </div>
-      }
-
-
+      )) }
     </div>
   )
 }

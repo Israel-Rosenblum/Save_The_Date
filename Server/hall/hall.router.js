@@ -12,9 +12,12 @@ router.post('/createHall', jwt.authenticateToken, async (req, res) => {
             res.sendStatus(403);
         }
         let results = await hallService.createHall(req.body.newHall)
+        console.log("🚀 ~ router.post ~ results", results)
         res.send(results)
     }
     catch (err) {
+        console.log("🚀 ~ router.post ~ err", err)
+
         res.status(err?.code ?? 400).send(err?.msg)
     }
 })

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import TextField from './compoInputs/TextField'
 import Checkbok from './compoInputs/Checkbok.buttom'
@@ -7,28 +7,31 @@ import MultiCalender from './MultiCalender'
 import UploadImage from './upload/UploadImage'
 import Cookies from 'js-cookie';
 
-export default function NewHall() {
+export default function NewHall({ setUserDetails }) {
     const parsData = JSON.parse(localStorage.getItem('userDetails'))
-    const nav = useNavigate()
+    
+    const [error, setError] = useState(false);
+
     const [newHall, setNewHall] = useState({
-        userId:  parsData._id,
+        userId: parsData._id,
         hallName: "", amount: "", description: "", dates: [],
         about: "", phone: "", city: "", address: "", image: "",
         hall: false, eventGarden: false, Mehadrin: false, kosher: false,
         elevator: false, accessibility: false, parking: false, fleshy: false, dairy: false, vegan: false,
     })
 
-    // console.log(newHall.image);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const { data } = await axios.post('http://localhost:4000/hall/createHall', { newHall },
-            { headers: { authorization: Cookies.get("token") } })
-            console.log("🚀 ~ handleSubmit ~ data", data.dates)
-            nav('/login')
+                { headers: { authorization: Cookies.get("token") } })
+            // console.log("🚀 ~ handleSubmit ~ data", data)
+            // nav('/login')
+            setUserDetails(JSON.parse(localStorage.getItem('userDetails')))
         }
         catch (err) {
-
+            setError(true)
         }
     };
     return (
@@ -54,7 +57,6 @@ export default function NewHall() {
                         <TextField name=" טלפון ליצירת קשר" customKey="phone" type="text" setField={setNewHall} field={newHall} />
                         <TextField name="עיר " customKey="city" type="text" setField={setNewHall} field={newHall} />
                         <TextField name="כתובת " customKey="address" type="text" setField={setNewHall} field={newHall} />
-                        {/* <TextField name="הכנס קישור לתמונה " customKey="photos" type="file" setField={setNewHall} field={newHall} /> */}
                         <UploadImage setField={setNewHall} field={newHall} />
 
                         <h1 className='font-bold text-center'>סוג המתחם</h1>
@@ -86,6 +88,7 @@ export default function NewHall() {
                     </button>
                 </form>
                 <div>
+                    {error && <p className="text-xl text-red-700 text-center"> נראה שלא הוזנו חלק מהנתונים כראוי</p>}
 
                 </div>
             </div>

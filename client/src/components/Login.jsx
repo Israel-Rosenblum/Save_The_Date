@@ -5,6 +5,8 @@ import TextField from './compoInputs/TextField';
 
 export default function Login({ setUserDetails }) {
 
+  const [error, setError] = useState(false);
+
   const [UserLogin, setUserLogin] = useState({
     email: "",
     password: "",
@@ -12,14 +14,21 @@ export default function Login({ setUserDetails }) {
 
   const heandleUser = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post('http://localhost:4000/user/login', { UserLogin });
-    if (data) {
-      setUserDetails(data.results);
+    try {
+      const response = await axios.post('http://localhost:4000/user/login', { UserLogin });
+      const data = response.data;
 
-      const { accessToken } = data.token
-      console.log("🚀 ~ heandleUser ~ accessToken", accessToken)
-      Cookies.set("token", `Bearer ${accessToken} `, { expires: 1 });
-      
+      if (data.results) {
+        console.log("🚀 ~ heandleUser ~ data", data)
+        setUserDetails(data.results);
+
+        const { accessToken } = data.token;
+        Cookies.set("token", `Bearer ${accessToken}`, { expires: 1 });
+      }
+      else { throw new Error('One of the data is incorrect ') }
+    }
+    catch (error) {
+      setError(true)
     }
   }
 
@@ -40,12 +49,7 @@ export default function Login({ setUserDetails }) {
               className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 " >
               התחברות
             </button>
-            {/* <Link to={"/register"}>
-              <div
-                className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 my-8 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 "  >
-                הרשמה
-              </div>
-            </Link> */}
+            {error && <p className="text-xl text-red-700 text-center">אחד מהנתונים לא נכונים!!</p>}
           </div>
         </form>
       </div>
