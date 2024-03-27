@@ -25,12 +25,12 @@ export default function Filter() {
     const matchingObjects = searchResults.filter((obj2Item) => {
       return Object.keys(result).every((data1) => {
         if (data1 === "amount") {
-          return obj2Item[data1] <= result[data1];
+          return obj2Item[data1] >= result[data1];
         }
         return data1 in obj2Item && obj2Item[data1];
       });
     });
-   
+
     //אם נבחרו סינונים יציג את הסינונים ואם לא נבחרו סינונים העדכן את המצב ההתחלתי
     matchingObjects.length != 0 ?
       setFilterResults(matchingObjects) :
@@ -49,11 +49,11 @@ export default function Filter() {
 
       <details className='m-4 border-b  border-slate-950'>
         <summary className='my-4 font-bold '>צפי אורחים</summary>
-        <RadioFilter name="עד 200" setField={setFilter} field={filter} customKey="amount" amount="200" />
-        <RadioFilter name="עד 300" setField={setFilter} field={filter} customKey="amount" amount="300" />
-        <RadioFilter name="עד 400" setField={setFilter} field={filter} customKey="amount" amount="400" />
-        <RadioFilter name="עד 500" setField={setFilter} field={filter} customKey="amount" amount="500" />
-        <RadioFilter name="מעל 600 " setField={setFilter} field={filter} customKey="amount" amount="10000" />
+        <RadioFilter name=" 200" setField={setFilter} field={filter} customKey="amount" amount="200" />
+        <RadioFilter name=" 300" setField={setFilter} field={filter} customKey="amount" amount="300" />
+        <RadioFilter name=" 400" setField={setFilter} field={filter} customKey="amount" amount="400" />
+        <RadioFilter name=" 500" setField={setFilter} field={filter} customKey="amount" amount="500" />
+        <RadioFilter name=" 600 " setField={setFilter} field={filter} customKey="amount" amount="600" />
       </details>
 
       <details className='m-4 border-b  border-slate-950'>
