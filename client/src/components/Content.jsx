@@ -7,7 +7,6 @@ import UserHall from './userHall'
 import Display from './Display'
 import Hall from './Hall'
 import NewHall from './NewHall'
-// import Search from './Search'
 import DataContext from './context/DataContext'
 
 
@@ -51,7 +50,7 @@ export default function Content() {
         <Route path='/register' element={<Register />} />
         <Route path='/userHall' element={<UserHall />} />
         <Route path='/display' element={<Display />} />
-        <Route path='/hall' element={<Hall />} />
+        <Route path='/hall/:index' element={<Hall />} />
         <Route path='/newHall' element={<NewHall setUserDetails={setUserDetails} />} />
         <Route path='*' element={<h1>not found</h1>} />
       </Routes>
