@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export default function Plan() {
-  const [tab, setTab] = useState(0)
+  
   return (
     <div className='grid md:grid-cols-2 h-full '>
       <section className='bg-[#eef1f3]'>
@@ -10,7 +10,7 @@ export default function Plan() {
       </section>
 
       <section className="h-full">
-        {/* <img className='rotate-180' src="../assets/xxx.jpg" alt="" /> */}
+       
 
       </section>
 
