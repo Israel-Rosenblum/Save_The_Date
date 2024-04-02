@@ -12,30 +12,35 @@ export default function Filter() {
     eventGarden: false, hall: false,
   })
 
-  const heandleSubmit = async () => {
-    // מחזיר מערך רק של true
-    const result = {};
+  const handleSubmit = async () => {
+    // Create an empty object to store selected filters
+    const selectedFilters = {};
+
+    // Filter out unchecked checkboxes and unselected radio buttons
     Object.keys(filter).forEach((key) => {
-      if (filter[key]) {
-        result[key] = filter[key];
+      if (filter[key] !== false) { // Check for non-false values (true or custom values)
+        selectedFilters[key] = filter[key];
       }
     });
-    console.log(result);
-    // בודק האם השדות תואמים לסינון שנבחר
-    const matchingObjects = searchResults.filter((obj2Item) => {
-      return Object.keys(result).every((data1) => {
-        if (data1 === "amount") {
-          return obj2Item[data1] >= result[data1];
-        }
-        return data1 in obj2Item && obj2Item[data1];
-      });
-    });
 
-    //אם נבחרו סינונים יציג את הסינונים ואם לא נבחרו סינונים העדכן את המצב ההתחלתי
-    matchingObjects.length != 0 ?
-      setFilterResults(matchingObjects) :
-      setFilterResults(searchResults)
-  }
+    // Filter searchResults based on selectedFilters
+    const matchingObjects = searchResults.filter((obj2Item) =>
+      Object.keys(selectedFilters).every((data1) => {
+        if (data1 === "amount") {
+          return obj2Item[data1] >= selectedFilters[data1]
+            && obj2Item[data1] <= parseInt(selectedFilters[data1]) + 150;
+        } else if (data1 in obj2Item && obj2Item[data1] === selectedFilters[data1]) {
+          return true;
+        }
+        return false;
+      })
+    );
+
+    // Update setFilterResults only if there are matching objects
+    setFilterResults(matchingObjects.length > 0 ? matchingObjects : []);
+  };
+
+
 
   return (
     <div className="h-[600px] overflow-auto touch-auto p-2 ">
@@ -49,12 +54,13 @@ export default function Filter() {
 
       <details className='m-4 border-b  border-slate-950'>
         <summary className='my-4 font-bold '>צפי אורחים</summary>
-        <RadioFilter name=" 200" setField={setFilter} field={filter} customKey="amount" amount="200" />
-        <RadioFilter name=" 300" setField={setFilter} field={filter} customKey="amount" amount="300" />
-        <RadioFilter name=" 400" setField={setFilter} field={filter} customKey="amount" amount="400" />
-        <RadioFilter name=" 500" setField={setFilter} field={filter} customKey="amount" amount="500" />
-        <RadioFilter name=" 600 " setField={setFilter} field={filter} customKey="amount" amount="600" />
+        <RadioFilter name=" 200-350" setField={setFilter} field={filter} customKey="amount" amount="200" />
+        <RadioFilter name=" 350-500" setField={setFilter} field={filter} customKey="amount" amount="350" />
+        <RadioFilter name=" 500-650" setField={setFilter} field={filter} customKey="amount" amount="500" />
+        <RadioFilter name=" 650-800" setField={setFilter} field={filter} customKey="amount" amount="600" />
+        <RadioFilter name=" 800-950 " setField={setFilter} field={filter} customKey="amount" amount="800" />
       </details>
+
 
       <details className='m-4 border-b  border-slate-950'>
         <summary className='my-4 font-bold '>כשרות</summary>
@@ -69,7 +75,7 @@ export default function Filter() {
         <Checkbok name="טבעוני " customKey="vegan" type="checkbox" setField={setFilter} field={filter} />
       </details>
 
-      <div onClick={heandleSubmit} className="flex w-full justify-center rounded-md  px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 "
+      <div onClick={handleSubmit} className="flex w-full justify-center rounded-md  px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 "
       >חיפוש</div>
     </div>
   )

@@ -6,7 +6,7 @@ async function create(data) {
     const result = await hallModel.create(data)
     return result;
 }
-
+ 
 async function read(filter = {}) {
     const test = await hallModel.find(filter)
     return test
