@@ -39,6 +39,20 @@ export default function Filter() {
     setFilterResults(matchingObjects.length > 0 ? matchingObjects : []);
   };
 
+  const resetFilters = () => {
+    setFilter({
+      amount: 0, // Reset amount to default value (no selection)
+      Mehadrin: false,
+      kosher: false,
+      fleshy: false,
+      dairy: false,
+      vegan: false,
+      eventGarden: false,
+      hall: false,
+    });
+    setFilterResults(searchResults)
+    // Optionally, reset any visual cues in Checkbok or RadioFilter components
+  };
   return (
     <div className="h-[600px] overflow-auto touch-auto p-2 ">
       <h1 className='my-8 border-b  border-slate-950'>סינונים</h1>
@@ -73,6 +87,9 @@ export default function Filter() {
 
       <div onClick={handleSubmit} className="flex w-full justify-center rounded-md  px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 "
       >חיפוש</div>
+      <div className="flex w-full justify-center rounded-md my-4 px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ">
+        <button onClick={resetFilters}>נקה סינונים</button>
+      </div>
     </div>
   )
 }
