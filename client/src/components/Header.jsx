@@ -12,7 +12,7 @@ export default function Header() {
         localStorage.clear();
     }
     return (
-        <div className='text-white flex justify-between items-center  h-24 max-w-[1240px] mx-auto px-4  border-b '>
+        <div className='text-white flex justify-between items-center   h-24 max-w-[1240px] mx-auto px-4  border-b '>
             <h1 onClick={clearStorage} className='w-full text-4xl font-bold text-[#101519]' >
                 <Link to={'/'}>   SAVE THE DATE</Link></h1>
             <ul className=' hidden md:flex'>

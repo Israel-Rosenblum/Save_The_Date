@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import ListHalls from './ListHalls'
 import Filter from './Filter'
-import Map from './Map'
+import Contact from './Contact'
 import DataContext from './context/DataContext'
 
 export default function Display() {
-  const { selectedDates, searchResults, setSearchResults,filterResults } = useContext(DataContext)
+  const { selectedDates, searchResults, setSearchResults, filterResults } = useContext(DataContext)
   //מציג את כל האולמות שנבחרו לפי התאריך
   useEffect(() => {
     async function getDates() {
@@ -26,8 +26,8 @@ export default function Display() {
         <div className="h-full bg-yellow-500 w-full ">
           <ListHalls />
         </div>
-        <div className="h-full bg-orange-500 max-w-[450px] w-full hidden xl:block ">
-          <Map />
+        <div className="h-full  max-w-[450px] w-full hidden xl:block ">
+          <Contact />
         </div>
       </div>
 

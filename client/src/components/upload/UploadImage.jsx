@@ -87,14 +87,7 @@ export default function UploadImage(props) {
                 </h2>
             </div>
             <div>
-                {/* {url && (
-                    <div>
-                        Access you file at{" "}
-                        <a href={url} target="_blank" rel="noopener noreferrer">
-                            {url}
-                        </a>
-                    </div>
-                )} */}
+               
             </div>
             <div>
                 {loading ? (

@@ -39,7 +39,7 @@ export default function UserHall() {
               src={userHallData[index]?.image} alt="" />
           </div>
           <div className='text-white mt-20 max-w-[1240px]' >
-            <h1 className='md:text-5xl sm:text-4xl text-3xl font-bold p-2 m-2'>
+            <h1 className=' md:text-5xl sm:text-4xl text-3xl font-bold p-2 '>
               {userHallData[index]?.hallName}
             </h1>
           </div>
@@ -76,7 +76,7 @@ export default function UserHall() {
             <UserCalender emptiDate={userHallData[index]?.dates} />
           </div>
           <div className='bg-white grid md:grid-cols-2 gap-8  '>
-            <div className='my-10  ' >
+            <div className='p-5  ' >
               <h1 className=' bg-[#778D45] text-white max-w-96 mt-20 h-12 text-center p-3 mx-auto '>
                 יצירת קשר/הצעת מחיר</h1>
               <h2 className='max-w-96 mt-5 h-12 text-center mx-auto text-2xl '>
@@ -89,10 +89,9 @@ export default function UserHall() {
             </div>
           </div>
         </div>
-      )) }
+      ))}
     </div>
   )
 }
 
- 
-    
+

@@ -4,21 +4,21 @@ import { useContext } from 'react';
 import DataContext from './context/DataContext';
 export default function Hall() {
   const { filterResults } = useContext(DataContext)
-  const params=useParams();
-  const {index}=params;
+  const params = useParams();
+  const { index } = params;
   return (
     <div>
       <div key={index} >
-        <div >
-          <img className='my-5 border rounded-2xl h-[750px] w-full bg-no-repeat bg-cover bg-bottom  '
+        <div className='px-20'>
+          <img className='my-5  border rounded-2xl h-[750px] w-full bg-no-repeat bg-cover bg-bottom  '
             src={filterResults[index]?.image} alt="" />
         </div>
         <div className='text-white mt-20 max-w-[1240px]' >
-          <h1 className='md:text-5xl sm:text-4xl text-3xl font-bold p-2 m-2'>
+          <h1 className=' md:text-5xl sm:text-4xl text-3xl font-bold p-2 m-2'>
             {filterResults[index]?.hallName}
           </h1>
         </div>
-        <h2 className='md:text-3xl sm:text-2xl text-1xl font-bold m-2 border-b my-4'>
+        <h2 className='md:text-3xl sm:text-2xl text-1xl font-bold m-2 p-2 border-b my-4'>
           {filterResults[index]?.description}
         </h2>
         <div>
@@ -46,14 +46,14 @@ export default function Hall() {
           <div className='p-10 flex flex-row items-center md:w-[800px]  mx-auto leading-loose '>
             {filterResults[index]?.about}</div>
         </div>
-        
-        <div className='bg-white grid md:grid-cols-2 gap-8  '>
-          <div className='my-10  ' >
-            <h1 className=' bg-[#778D45] text-white max-w-96 mt-20 h-12 text-center p-3 mx-auto '>
+
+        <div className='bg-white   '>
+          <div className='  p-5   ' >
+            <h1 className=' bg-[#778D45] text-white max-w-96  h-12 text-center p-3 mx-auto '>
               יצירת קשר/הצעת מחיר</h1>
             <h2 className='max-w-96 mt-5 h-12 text-center mx-auto text-2xl '>
               {filterResults[index]?.phone}</h2>
-            <div className=' flex justify-around max-w-96 mt-2 h-12 text-center p-3 mx-auto bg-[#778D45] text-white mb-8'>
+            <div className=' flex justify-around max-w-96 mt-2 h-12 text-center p-3 mx-auto bg-[#778D45] text-white '>
               <span className="material-symbols-outlined">call</span>
               <span className="material-symbols-outlined">mail</span>
               <span className="material-symbols-outlined">alternate_email</span>
@@ -61,8 +61,8 @@ export default function Hall() {
           </div>
         </div>
       </div>
-  
-  </div>
-)
+
+    </div>
+  )
 }
 
